@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router';
-import app, { provider } from '../../Firebase/firebase';
+import app, { database, provider } from '../../Firebase/firebase';
 import { loginRequest, loginSuccess } from '../../Redux/auth/actions';
 import "./Login.css"
 function Login() {
@@ -20,7 +20,20 @@ const isAuth = useSelector(store=>store.auth.isAuth)
       const token = credential.accessToken;
       // The signed-in user info.
       const user = result.user;
-      // ...
+               
+     database.collection("users").where("email", "==",user.email ).get()
+     .then(res=>{
+        if(!res.docs.length) {
+          const payload = {
+              id:user.uid,
+              name : user.displayName,
+              email : user.email,
+              photoURL : user.photoURL
+          }
+         database.collection("users").add(payload)
+      }
+     })
+    
       dispatch(loginSuccess({user,credential,token}))
     }).catch((error) => {
      alert(error.message)

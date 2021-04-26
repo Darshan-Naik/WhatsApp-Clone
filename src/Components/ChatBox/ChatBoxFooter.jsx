@@ -9,15 +9,16 @@ import { useSelector } from 'react-redux';
 function ChatBoxFooter() {
     const [message,setMessage] = React.useState("")
     const {ChatId} = useParams()
-    const {displayName}= useSelector(store=>store.auth.user)
+    const {displayName,photoURL}= useSelector(store=>store.auth.user)
     const handleSend=(e)=>{
         e.preventDefault()
-        if(message){ 
+        if(message && ChatId){ 
             const payload ={
                     author : displayName,
                     isRead : false,
                     message,
-                    time : new Date().toLocaleTimeString(),
+                    time : new Date(),
+                    authorPhoto : photoURL
             }
             database.collection("ChatRooms")
             .doc(ChatId).collection("messages")

@@ -5,7 +5,8 @@ import UserCard from './UserCard'
 import "./SideBar.css"
 import { database } from '../../Firebase/firebase'
 import { useSelector } from 'react-redux'
-function SideBar() {
+
+function SideBar({users}) {
 const [chatRoom,setChatRoom] = React.useState([])
 const {email,displayName} = useSelector(store=>store.auth.user)
     React.useEffect(()=>{
@@ -18,6 +19,19 @@ const {email,displayName} = useSelector(store=>store.auth.user)
             unsubscribe()
         }
     },[])
+
+    const getPic=(email)=>{
+        for(let i=0;i<users.length;i++){
+            if(users[i].email === email[0]){
+                return users[i].photoURL
+            }
+        }
+            
+                
+            
+    }
+
+
     return (
         <div className="sideBar flexColumn">
             <SideBarHeader />
@@ -29,7 +43,11 @@ const {email,displayName} = useSelector(store=>store.auth.user)
                          <p> Add new contact by email id</p>
                     </div>
                 )}
-            {chatRoom?.map(room=><UserCard key={room.id} id={room.id} name={room.data.authorNames.filter(name=>name!==displayName)}/>)}
+            {chatRoom?.map(room=>(<UserCard key={room.id} id={room.id}
+             name={room.data.authorNames.filter(name=>name!==displayName)}
+             photoURL={getPic(room.data.authors.filter(item=>item!==email))}
+             />)
+             )}
             </div>
            
 

@@ -55,6 +55,9 @@
     color: var(--secondary-text-color);
     font-size: 12px;
     font-weight: 500;
+    max-width:70px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .userCardMainDetails>h3{
     color: var( --primary-text-color);

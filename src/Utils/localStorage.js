@@ -11,5 +11,8 @@ function loadData(key){
         return false;
     }
 }
+function removeData(key){
+    localStorage.removeItem(key)
+}
 
-export {saveData,loadData}
+export {saveData,loadData,removeData}

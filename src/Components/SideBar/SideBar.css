@@ -32,10 +32,10 @@
 .searchBox>input::placeholder{
     color: rgb(25, 196, 196);
 }
-.sideBarUserBox{
+.sideBarUserBox,.sideBarResultBox{
     flex: 1;
 }
-.userCard{
+.userCard,.resultCard{
     background-color: var(--secondary-color);
     border-bottom: 1px solid rgb(4, 207, 207);
     justify-content: space-between;
@@ -58,6 +58,7 @@
     max-width:70px;
     overflow: hidden;
     text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .userCardMainDetails>h3{
     color: var( --primary-text-color);
@@ -68,7 +69,7 @@
     color: var(--secondary-text-color);
     height: 8vh;
 }
-.userCard:hover{
+.userCard:hover,.resultCard:hover{
     background-color: #E9EAEB;
 }
 .searchIcon{
@@ -88,4 +89,27 @@
 .noContacts>p{
     font-size: 14px;
     color: var(--secondary-text-color);
+}
+
+.resultCard>.flexBox>*{
+    margin: 0 5px;
+}
+.resultCard button{
+    padding:5px 10px;
+    border: none;
+    background-color: rgb(51, 148, 51);
+    color: white;
+    transition: all 0.3s;
+}
+.resultCard button:hover{
+    background-color: green;
+    box-shadow: 0px 0px 5px green;
+}
+.resultCard h3{
+    font-size: 14px;
+    color: var(--primary-text-color) ;
+}
+.resultCard small{
+    font-size: 10px;
+    color: var(--secondary-text-color) ;
 }

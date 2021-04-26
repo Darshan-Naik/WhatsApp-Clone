@@ -1,4 +1,4 @@
-import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS } from "./actionTypes"
+import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT } from "./actionTypes"
 
 
 const loginRequest =()=>{
@@ -17,5 +17,9 @@ const loginSuccess =(payload)=>{
         payload
     }
 }
-
-export { loginFailure,loginSuccess,loginRequest}
+const logout =()=>{
+    return {
+        type:LOGOUT
+    }
+}
+export { loginFailure,loginSuccess,loginRequest,logout}

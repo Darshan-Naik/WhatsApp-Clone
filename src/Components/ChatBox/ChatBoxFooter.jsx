@@ -7,13 +7,15 @@ import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognitio
 import { database } from '../../Firebase/firebase';
 import { useParams } from 'react-router';
 import { useSelector } from 'react-redux';
-function ChatBoxFooter() {
+function ChatBoxFooter({disabled}) {
     const [message,setMessage] = React.useState("")
     const {ChatId} = useParams()
-    const {displayName,photoURL}= useSelector(store=>store.auth.user)
+    const focus = React.useRef()
+     const {displayName,photoURL}= useSelector(store=>store.auth.user)
     const { transcript, resetTranscript } = useSpeechRecognition()
     React.useEffect(()=>{
         setMessage(transcript)
+        focus.current.focus()
     },[transcript])
     const handleVoice=()=>{
         resetTranscript()
@@ -41,7 +43,7 @@ function ChatBoxFooter() {
                 <InsertEmoticonIcon />
             </IconButton>
             <form onSubmit={handleSend}>
-                <input type="text" placeholder="Type a message" value={message} onChange={(e)=>setMessage(e.target.value)}/>
+                <input disabled={disabled} ref={focus} type="text" placeholder="Type a message" value={message} onChange={(e)=>setMessage(e.target.value)}/>
             </form>
             <IconButton onClick={handleSend}>
                 <SendIcon />

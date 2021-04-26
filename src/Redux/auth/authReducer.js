@@ -1,5 +1,5 @@
-import { loadData, saveData } from "../../Utils/localStorage"
-import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS } from "./actionTypes"
+import { loadData, removeData, saveData } from "../../Utils/localStorage"
+import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT } from "./actionTypes"
 
 
 const init = loadData("auth") || {
@@ -38,6 +38,18 @@ export const authReducer =(state=init,{type,payload})=>{
                 }
                 saveData("auth",newState)
                 return newState
+            }
+            case LOGOUT : {
+                removeData("auth")
+                return {
+                    ...state,
+                    isAuth : false,
+                    user : {},
+                    isLoading : false,
+                    isError : false,
+                    credential : {},
+                    token : ""
+                }
             }
             default : return state
     }

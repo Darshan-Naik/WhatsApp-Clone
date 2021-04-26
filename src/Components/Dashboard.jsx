@@ -32,7 +32,7 @@ function Dashboard() {
     return isAuth? (
         <>
           <SideBar users={users} />
-            <ChatBox ChatId={chatRoom[0]?.id} name={chatRoom[0]?.data.authorNames[0]}/>
+            <ChatBox users={users} ChatId={chatRoom[0]?.id} name={chatRoom[0]?.data.authorNames[0]}/>
         </>
     ) :<Redirect to="/login" />
 }

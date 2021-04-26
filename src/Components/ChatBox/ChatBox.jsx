@@ -30,7 +30,7 @@ function ChatBox(props) {
         <div className="chatBox flexColumn">
             <ChatBoxHeader messages={messages} />
             <ChatBody messages={messages}/>
-            <ChatBoxFooter />
+            <ChatBoxFooter disabled={!props?.users?.length} />
         </div>
     )
 }

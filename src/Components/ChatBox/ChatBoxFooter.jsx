@@ -3,6 +3,7 @@ import { IconButton } from '@material-ui/core'
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import MicIcon from '@material-ui/icons/Mic';
 import SendIcon from '@material-ui/icons/Send';
+import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition'
 import { database } from '../../Firebase/firebase';
 import { useParams } from 'react-router';
 import { useSelector } from 'react-redux';
@@ -10,6 +11,14 @@ function ChatBoxFooter() {
     const [message,setMessage] = React.useState("")
     const {ChatId} = useParams()
     const {displayName,photoURL}= useSelector(store=>store.auth.user)
+    const { transcript, resetTranscript } = useSpeechRecognition()
+    React.useEffect(()=>{
+        setMessage(transcript)
+    },[transcript])
+    const handleVoice=()=>{
+        resetTranscript()
+        SpeechRecognition.startListening()    
+    }
     const handleSend=(e)=>{
         e.preventDefault()
         if(message && ChatId){ 
@@ -37,7 +46,7 @@ function ChatBoxFooter() {
             <IconButton onClick={handleSend}>
                 <SendIcon />
             </IconButton>
-            <IconButton>
+            <IconButton onClick={handleVoice}>
                 <MicIcon />
             </IconButton>
         </div>

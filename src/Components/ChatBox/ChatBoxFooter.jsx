@@ -8,11 +8,15 @@ import { database } from '../../Firebase/firebase';
 import { useParams } from 'react-router';
 import { useSelector } from 'react-redux';
 
+import 'emoji-mart/css/emoji-mart.css'
+import { Picker } from 'emoji-mart'
+
 function ChatBoxFooter({disabled}) {
     const [message,setMessage] = React.useState("") //new message state
     const {ChatId} = useParams()  // current chat room id
     const focus = React.useRef()  // new message input element reference 
      const {displayName,photoURL}= useSelector(store=>store.auth.user) // current user name and photo
+     const [emoji,setEmoji] = React.useState(false)
 
     const { transcript, resetTranscript } = useSpeechRecognition() // voice recognition system
 
@@ -24,10 +28,14 @@ function ChatBoxFooter({disabled}) {
 
     
     const handleVoice=()=>{
+        setEmoji(false)
         resetTranscript()
         SpeechRecognition.startListening()    
     } //enable vice recognition 
 
+    const handleEmoji=(emoji)=>{
+        setMessage(message + emoji.native)
+    } // emoji typing
     
     const handleSend=(e)=>{
         e.preventDefault()
@@ -39,22 +47,23 @@ function ChatBoxFooter({disabled}) {
                     time : new Date(),
                     authorPhoto : photoURL
             }
-            console.log(payload)
             database.collection("ChatRooms")
             .doc(ChatId).collection("messages")
             .add(payload)
         }
         setMessage("")
+        setEmoji(false)
     } //new message handling (sending)
 
    
     return (
-        <div className="chatBoxFooter flexBox">
-             <IconButton>
+        <div className="flexColumn">
+        <div className="chatBoxFooter flexBox" >
+             <IconButton onClick={()=>setEmoji(!emoji)}>
                 <InsertEmoticonIcon />
             </IconButton>
             <form onSubmit={handleSend}>
-                <input disabled={disabled} ref={focus} type="text" placeholder="Type a message" value={message} onChange={(e)=>setMessage(e.target.value)}/>
+                <input disabled={disabled} ref={focus} type="text" placeholder="Type a message" value={message} onChange={(e)=>setMessage(e.target.value)} onClick={()=>setEmoji(false)} />
             </form>
             <IconButton onClick={handleSend}>
                 <SendIcon />
@@ -62,6 +71,10 @@ function ChatBoxFooter({disabled}) {
             <IconButton onClick={handleVoice}>
                 <MicIcon />
             </IconButton>
+            
+        </div>
+        {/* emojis component */}
+      {emoji&&  <Picker set='google' onClick={handleEmoji}/>}
         </div>
     )  //rendering chat box footer 
 } 

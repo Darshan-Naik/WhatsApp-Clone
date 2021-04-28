@@ -65,7 +65,7 @@
     max-width: 40vw;
     word-wrap: break-word;
 }
-.message>div{
+.message>.messageTime{
     min-height: 30px;
     height: 100%;
     display: flex;
@@ -95,4 +95,39 @@
 }
 .deleteModalBox button{
     margin: 10px;
+}
+.messageEditBox{
+    position: absolute;
+    right: 0;
+    top: -23px;
+    background-color: var(--primary-color);
+    border: 1px solid #128C7E;
+    border-radius: 10px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.521);
+    padding: 0 5px;
+}
+.messageEditBoxInput{
+    position: absolute;
+    right: 0;
+    top : -35px;
+    background-color: var(--primary-color);
+    border: 1px solid #128C7E;
+    border-radius: 10px;
+    padding: 5px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.521);
+}
+.messageEditBoxInput input{
+    background-color: transparent;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #128C7E;
+    margin: 0 10px;
+    padding: 5px;
+}
+.emoji-mart{
+    width: 100%!important;
+    border-radius: 0!important;
+}
+.emoji-mart-preview{
+display: none;
 }

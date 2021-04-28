@@ -20,7 +20,7 @@ function ChatBody({messages}) {
                 )}
             </div>
           {/* rendering messages  */}
-            {messages.map(message=><Message key={message.id} data={message.data} />)}
+            {messages.map(message=><Message key={message.id} id={message.id} data={message.data} />)}
         </div>
     ) //Main chat body rendering
 }

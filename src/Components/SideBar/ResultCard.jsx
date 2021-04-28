@@ -6,7 +6,7 @@ import { database } from '../../Firebase/firebase'
 function ResultCard({name,email:userEmail,photoURL,resetSearch}) {
     const {displayName,email} = useSelector(store=>store.auth.user) //current user name and email for new chat room creation
 
-    // new chat room creation 
+    
     const handleSubmit=()=>{
             const payload = {
                 authorNames : [name,displayName],
@@ -16,9 +16,9 @@ function ResultCard({name,email:userEmail,photoURL,resetSearch}) {
                 database.collection("ChatRooms").add(payload)
             }    
            resetSearch();
-    }
+    } // new chat room creation 
 
-// rendering search result card
+
     return (
         <div className="resultCard flexBox">
             <div className="flexBox">
@@ -32,7 +32,7 @@ function ResultCard({name,email:userEmail,photoURL,resetSearch}) {
                 <button onClick={handleSubmit}>Add to Contact</button>
             </div>
         </div>
-    )
+    ) // rendering search result card
 }
 
 export default ResultCard

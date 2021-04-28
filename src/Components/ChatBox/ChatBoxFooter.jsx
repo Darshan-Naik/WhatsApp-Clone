@@ -16,19 +16,19 @@ function ChatBoxFooter({disabled}) {
 
     const { transcript, resetTranscript } = useSpeechRecognition() // voice recognition system
 
-    //voice typing 
+   
     React.useEffect(()=>{
         setMessage(transcript)
         focus.current.focus()
-    },[transcript])
+    },[transcript])  //voice typing 
 
-    //enable vice recognition 
+    
     const handleVoice=()=>{
         resetTranscript()
         SpeechRecognition.startListening()    
-    }
+    } //enable vice recognition 
 
-    //new message handling (sending)
+    
     const handleSend=(e)=>{
         e.preventDefault()
         if(message && ChatId){ 
@@ -39,14 +39,15 @@ function ChatBoxFooter({disabled}) {
                     time : new Date(),
                     authorPhoto : photoURL
             }
+            console.log(payload)
             database.collection("ChatRooms")
             .doc(ChatId).collection("messages")
             .add(payload)
         }
         setMessage("")
-    }
+    } //new message handling (sending)
 
-    //rendering chat box footer 
+   
     return (
         <div className="chatBoxFooter flexBox">
              <IconButton>
@@ -62,7 +63,7 @@ function ChatBoxFooter({disabled}) {
                 <MicIcon />
             </IconButton>
         </div>
-    )
-}
+    )  //rendering chat box footer 
+} 
 
 export default ChatBoxFooter

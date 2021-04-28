@@ -5,20 +5,18 @@ function Message({data={}}) {
     const {author,message,isRead,time,authorPhoto} = data //message data
     const {displayName}= useSelector(store=>store.auth.user) // current user name 
 
-     //converting universal message time to local time
-    const localTime =  new Date(time?.seconds).toLocaleTimeString()
+    const localTime =  new Date(time.toDate()).toLocaleTimeString()//converting universal message time to local time
 
-    // rendering message
     return (
             // changing message style based on received / sent
         <div className={`message flexBox ${author !== displayName? "received" : "sent"}`}>
-            <p>{message || "Dummy text"}</p>
+            <p>{message}</p>
             <div>
-            <small>{localTime || "Time stamp"}</small>
+            <small>{localTime==="Invalid Date"?  "": localTime}</small>
             </div>
             
         </div>
-    )
+    )  // rendering message
 }
 
 export default Message

@@ -51,7 +51,7 @@
    flex: 1;
     margin-left: 15px;
 }
-.userCardMainDetails>p{
+.userCardMainDetails p{
     color: var(--secondary-text-color);
     font-size: 12px;
     font-weight: 500;
@@ -60,7 +60,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-.userCardMainDetails>h3{
+.userCardMainDetails h3{
     color: var( --primary-text-color);
     font-size: 14px;
 }
@@ -119,4 +119,20 @@
 }
 .noResult *{
     margin:0 5px;
+}
+.userName{
+    width: fit-content;
+}
+.userName>*{
+    margin-right: 5px;
+}
+.newMessageDot{
+background-color: #128C7E;
+padding:0 5px;
+font-size: 10px;
+border-radius: 50%;
+color: white;
+text-align: center;
+min-height: 15px;
+min-width: 15px;
 }

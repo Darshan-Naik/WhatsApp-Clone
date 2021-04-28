@@ -85,3 +85,14 @@
 .received>div{
     padding: 5px 5px 0px 5px;
 }
+.deleteModalBox{
+    padding: 20px;
+    background-color: var(--primary-color);
+    box-shadow: 0px 0px 50px black;
+}
+.deleteModalBox h3{
+    margin:10px;
+}
+.deleteModalBox button{
+    margin: 10px;
+}

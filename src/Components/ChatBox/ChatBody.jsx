@@ -5,12 +5,12 @@ import Message from './Message'
 function ChatBody({messages}) {
    const scroll = React.useRef() //scroll reference element for auto scroll function 
 
-    // auto scrolling chat body on load 
+    
    React.useEffect(()=>{
     scroll.current.scroll(0,200000)
-   },[messages]) 
+   },[messages]) // auto scrolling chat body on load 
 
-    //Main chat body rendering
+    
     return (
         <div ref={scroll} className="chatBody flexColumn scroll" >
             <div className="spaceFiller flexBox">
@@ -22,7 +22,7 @@ function ChatBody({messages}) {
           {/* rendering messages  */}
             {messages.map(message=><Message key={message.id} data={message.data} />)}
         </div>
-    )
+    ) //Main chat body rendering
 }
 
 export default ChatBody

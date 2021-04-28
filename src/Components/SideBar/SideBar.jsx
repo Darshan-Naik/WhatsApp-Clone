@@ -14,7 +14,7 @@ const filtererUsers =React.useRef([])  // all users details which are not presen
 const [query,setQuery] = React.useState("") // search query state
 const {email,displayName} = useSelector(store=>store.auth.user) // current user email id
     
-    //updating users data based on current user contact details and registered users 
+  
     React.useEffect(()=>{
              users.forEach(user=>{
                 let flag = false;
@@ -31,39 +31,39 @@ const {email,displayName} = useSelector(store=>store.auth.user) // current user 
             return ()=>{
                 filtererUsers.current.length=0;
             }    
-      },[users,chatRoom])
+      },[users,chatRoom])   //updating users data based on current user contact details and registered users 
       
-      //updating search result and search state flag based on search query 
+      
     React.useEffect(()=>{
-        setResult(filtererUsers.current.filter(user=>user.email.includes(query) || user.name.toLowerCase().includes(query) ))
+        setResult(filtererUsers.current.filter(user=>user.email.includes(query.toLowerCase()) || user.name.toLowerCase().includes(query) ))
         if(query){
             setSearch(true)
         } else{
             setSearch(false)
         }       
-        },[query])
+        },[query]) //updating search result and search state flag based on search query 
     
-    //finding chat room pic for the chat room cards
+    
     const getPic=(email)=>{
         for(let i=0;i<users.length;i++){
             if(users[i].email === email[0]){
                 return users[i].photoURL
             }
         }             
-    }
+    } //finding chat room pic for the chat room cards
     
-    //updating search query
+   
     const handleQuery =(e)=>{
         setQuery(e.target.value)
-    }
+    }  //updating search query
 
-    //resetting search query and search state flag when new contact is added
+    
     const resetSearch =()=> {
         setQuery("")
         setSearch(false)
-    }
+    } //resetting search query and search state flag when new contact is added
 
-    // Rendering main side bar component
+ 
     return (
         <div className="sideBar flexColumn">
 
@@ -100,7 +100,7 @@ const {email,displayName} = useSelector(store=>store.auth.user) // current user 
            }
 
         </div>
-    )
+    )    // Rendering main side bar component
 }
 
 export default SideBar

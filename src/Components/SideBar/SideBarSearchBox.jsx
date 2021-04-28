@@ -3,15 +3,15 @@ import SearchIcon from '@material-ui/icons/Search';
 
 function SideBarSearchBox({query,handleQuery}) {
     
-    //Rendering search bar
+    
     return (
         <div className="SideBarSearchBox">
             <div className="searchBox flexBox">
                 <SearchIcon className="searchIcon"/>
-                <input type="email" value={query} onChange={handleQuery} placeholder="Search or start new conversation"/>
+                <input type="text" value={query} onChange={handleQuery} placeholder="Search or start new conversation"/>
             </div>
         </div>
-    )
+    ) //Rendering search bar
 }
 
 export default SideBarSearchBox

@@ -12,16 +12,22 @@ function SideBarHeader() {
     const dispatch = useDispatch()
     const history = useHistory()
 
-    //Logout function 
+    const handleVisible =()=>{
+        setVisible(!visible)
+            setTimeout(()=>{
+                setVisible(false)
+            },5000)       
+    } // enable sign-out button for 5 sec
+   
     const handleLogOut = ()=>{
         dispatch(logout())
         history.push("/login")
-    }
+    }  //Logout function 
 
 
     return (
-        <div className ="sideBarHeader flexBox"  onMouseLeave={()=>setVisible(false)}>
-            <Avatar src ={photoURL} onMouseEnter={()=>setVisible(true)}/>
+        <div className ="sideBarHeader flexBox"  >
+            <Avatar src ={photoURL} />
             {/* conditionally rendering sign-out button */}
             { visible && ( <div>
                     <Button 
@@ -35,10 +41,10 @@ function SideBarHeader() {
                     </Button>
                 </div>)} 
             <div>
-            <IconButton>
+            <IconButton >
                 <MessageIcon />
             </IconButton>
-            <IconButton>
+            <IconButton onClick={handleVisible} >
                 <MoreVertIcon />
             </IconButton>
             </div>

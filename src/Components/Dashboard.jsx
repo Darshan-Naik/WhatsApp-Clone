@@ -10,55 +10,53 @@ function Dashboard() {
     const isAuth = useSelector(store=>store.auth.isAuth) //auth state info
     const [chatRoom,setChatRoom] = React.useState([])   // user private chat rooms 
     const [users,setUsers] = React.useState([])    // all registered users 
-    const {email} = useSelector(store=>store.auth.user)  // current user email-id
+    const {email,displayName} = useSelector(store=>store.auth.user)  // current user email-id and name
 
     const dispatch = useDispatch()
 
-    //Collecting User Chat-Rooms from dataBase on load
+    
     React.useEffect(()=>{
       const  unsubscribe = email && database.collection("ChatRooms")
       .where("authors", "array-contains",email )
       .onSnapshot(snapshot=>{
             setChatRoom(snapshot.docs.map(doc=>({id:doc.id,data : doc.data()})))
-        })
-
-        // Clean up for live chat-room data subscription
+        }) 
+      
         return ()=>{
             unsubscribe &&  unsubscribe()
-        }
-    },[])
+        }  // Clean up for live chat-room data subscription
+    },[]) //Collecting User Chat-Rooms from dataBase on load
 
-    //Checking user auth state on load
+   
     React.useEffect(()=>{
         app.auth().onAuthStateChanged((user)=>{
             if (!user) {
                 dispatch(logout())
             }
           });
-    },[])
+    },[])  //Checking user auth state on load
 
-    //Collection all registered users details 
+   
     React.useEffect(()=>{
         const  unsubscribe = database.collection("users")
         .onSnapshot(snapshot=>{
             setUsers(snapshot.docs.map(doc=>(doc.data())))
           })
-
-          // Clean up for live  registered-users  data subscription
+          
           return ()=>{
              unsubscribe()
-          }
-      },[])
+          } // Clean up for live registered-users  data subscription
+      },[])  //Collection all registered users details 
 
-      //Dashboard rendering based on uth state
+      
     return isAuth? (
         <>
             <SideBar chatRoom={chatRoom} users={users} />
 
             {/* default chat-room for first load ) */}
-            <ChatBox users={users} ChatId={chatRoom[0]?.id} name={chatRoom[0]?.data.authorNames[0]}/> 
+            <ChatBox users={users} ChatId={chatRoom[0]?.id} name={chatRoom[0]?.data.authorNames.filter(name=>name !== displayName)[0]}/> 
         </>
     ) :<Redirect to="/login" /> //Redirecting user to log-in page if user is not logged in 
-}
+} //Dashboard rendering based on Auth state
 
 export default Dashboard

@@ -10,7 +10,7 @@ function Login() {
 
     const isAuth = useSelector(store=>store.auth.isAuth) // current user auth state
 
-    //main log in function
+      //main log-in function
       const login=()=>{
         dispatch(loginRequest())
 

@@ -113,3 +113,10 @@
     font-size: 10px;
     color: var(--secondary-text-color) ;
 }
+.noResult{
+    background-color: var(--primary-color);
+    padding: 20px;
+}
+.noResult *{
+    margin:0 5px;
+}

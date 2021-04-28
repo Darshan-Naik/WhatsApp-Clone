@@ -3,7 +3,7 @@
   --secondary-color: #FFFFFF;
   --primary-text-color:  rgb(0, 61, 61);
   --secondary-text-color: teal;
-}
+} /* Main UI color pallet */
 
 .app{
   width: 90vw;
@@ -12,36 +12,37 @@
   margin-top: 20px;
   box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.575);
   border: 1px solid teal;
-}
+} /* Main App body */
 
 .flexBox,.app{
   display: flex;
   justify-content: center;
   align-items: center;
-}
+} /* Main flexBox style and alignments */
 
 .flexColumn{
   display: flex;
   flex-direction: column;
-}
+} /* flexBox direction change */
 
 .scroll{
   overflow: auto;
   scroll-behavior: smooth;
-}
+} /* UI scroll bar designs  */
+
 
 .scroll::-webkit-scrollbar-track{
 	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.11);
 	background-color: var(--secondary-color);
-}
+}/* UI scroll bar designs  */
 
 .scroll::-webkit-scrollbar{
 	width: 10px;
 	background-color: #F5F5F5;
-}
+}/* UI scroll bar designs  */
 
 .scroll::-webkit-scrollbar-thumb{
 	border-radius: 10px;
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
 	background-color: #F5F5F5;
-}
+}/* UI scroll bar designs  */

@@ -7,28 +7,33 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { logout } from '../../Redux/auth/actions';
 import { useHistory } from 'react-router';
 function SideBarHeader() {
-    const [visible,setVisible] = React.useState(false)
-    const {photoURL} = useSelector(store=>store.auth.user)
+    const [visible,setVisible] = React.useState(false)  //Sign out button visibility flag state
+    const {photoURL} = useSelector(store=>store.auth.user) //current user profile photo
     const dispatch = useDispatch()
     const history = useHistory()
+
+    //Logout function 
     const handleLogOut = ()=>{
         dispatch(logout())
         history.push("/login")
     }
+
+
     return (
         <div className ="sideBarHeader flexBox"  onMouseLeave={()=>setVisible(false)}>
             <Avatar src ={photoURL} onMouseEnter={()=>setVisible(true)}/>
-            <div style={{display : `${visible?"block" : "none"}` }}>
-                <Button 
-                    onClick={handleLogOut}
-                    variant="contained"
-                    color="primary"
-                    size="small"
-                    startIcon={<ExitToAppIcon />}
-                            >
-                    Sign Out
-                 </Button>
-            </div>
+            {/* conditionally rendering sign-out button */}
+            { visible && ( <div>
+                    <Button 
+                        onClick={handleLogOut}
+                        variant="contained"
+                        color="primary"
+                        size="small"
+                        startIcon={<ExitToAppIcon />}
+                                >
+                        Sign Out
+                    </Button>
+                </div>)} 
             <div>
             <IconButton>
                 <MessageIcon />

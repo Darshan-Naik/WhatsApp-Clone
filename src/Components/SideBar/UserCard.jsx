@@ -4,12 +4,16 @@ import { useHistory, useParams } from 'react-router'
 import { database } from '../../Firebase/firebase'
 
 function UserCard({id,name,photoURL}) {
-    const [messages,setMessages] = React.useState([])
+    const [messages,setMessages] = React.useState([]) //current chat-room messages (consuming last ever message only)
     const history = useHistory()
+    const {ChatId} = useParams()
+
+    //redirection tto selected chat-room
     const handleClick=()=>{
         history.push("/user/"+name + "/" + id)
-    }
-    const {ChatId} = useParams()
+    } 
+
+    //Collection current chat room messages 
     React.useEffect(()=>{
         const unsubscribe  =  database.collection("ChatRooms").doc(id).collection("messages")
         .orderBy("time","desc").onSnapshot(snapshot=>(
@@ -20,6 +24,8 @@ function UserCard({id,name,photoURL}) {
         }
     
     },[id])
+
+    //Rendering users chat room card
     return (
         <div onClick={handleClick} className={`flexBox userCard ${ChatId===id && "activeUser"}`}>
             <div className="userCardMain flexBox">

@@ -6,10 +6,8 @@ body {
   background: #128C7E;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
+/* UI main style style preference */
+
 *{
   margin: 0;
   padding: 0;

@@ -7,20 +7,28 @@ import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognitio
 import { database } from '../../Firebase/firebase';
 import { useParams } from 'react-router';
 import { useSelector } from 'react-redux';
+
 function ChatBoxFooter({disabled}) {
-    const [message,setMessage] = React.useState("")
-    const {ChatId} = useParams()
-    const focus = React.useRef()
-     const {displayName,photoURL}= useSelector(store=>store.auth.user)
-    const { transcript, resetTranscript } = useSpeechRecognition()
+    const [message,setMessage] = React.useState("") //new message state
+    const {ChatId} = useParams()  // current chat room id
+    const focus = React.useRef()  // new message input element reference 
+     const {displayName,photoURL}= useSelector(store=>store.auth.user) // current user name and photo
+
+    const { transcript, resetTranscript } = useSpeechRecognition() // voice recognition system
+
+    //voice typing 
     React.useEffect(()=>{
         setMessage(transcript)
         focus.current.focus()
     },[transcript])
+
+    //enable vice recognition 
     const handleVoice=()=>{
         resetTranscript()
         SpeechRecognition.startListening()    
     }
+
+    //new message handling (sending)
     const handleSend=(e)=>{
         e.preventDefault()
         if(message && ChatId){ 
@@ -37,6 +45,8 @@ function ChatBoxFooter({disabled}) {
         }
         setMessage("")
     }
+
+    //rendering chat box footer 
     return (
         <div className="chatBoxFooter flexBox">
              <IconButton>

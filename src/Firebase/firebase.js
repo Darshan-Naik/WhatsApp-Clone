@@ -5,13 +5,13 @@ import "firebase/firestore";
 import "firebase/database";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDStApBuIxGS8s4pFRsoH1KE6UnVTjFOQY",
-    authDomain: "whatsup-62c5b.firebaseapp.com",
-    projectId: "whatsup-62c5b",
-    storageBucket: "whatsup-62c5b.appspot.com",
-    messagingSenderId: "700026683522",
-    appId: "1:700026683522:web:83d1cb6b781c89516ab49b",
-    measurementId: "G-TXERFTFNR6"
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
+    measurementId: process.env.REACT_APP_MEASUREMENT_ID
   };
 
  const app = firebase.initializeApp(firebaseConfig);
